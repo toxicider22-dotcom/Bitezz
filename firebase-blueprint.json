@@ -1,0 +1,146 @@
+{
+  "entities": {
+    "MenuItem": {
+      "title": "MenuItem",
+      "description": "Menu item offered in the POS system",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "description": { "type": "string", "maxLength": 500 },
+        "price": { "type": "number" },
+        "cogs": { "type": "number" },
+        "category": { "type": "string" },
+        "image": { "type": "string" },
+        "isAvailable": { "type": "boolean" },
+        "stock": { "type": "number" }
+      },
+      "required": ["id", "name", "price", "category", "isAvailable", "stock"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "Customer record with credit tab tracking",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string", "maxLength": 100 },
+        "phone": { "type": "string", "maxLength": 30 },
+        "email": { "type": "string", "maxLength": 100 },
+        "currentTabBalance": { "type": "number" },
+        "creditLimit": { "type": "number" },
+        "totalSpent": { "type": "number" },
+        "ordersCount": { "type": "number" },
+        "notes": { "type": "string", "maxLength": 500 },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "name", "currentTabBalance", "creditLimit", "totalSpent", "ordersCount"]
+    },
+    "Order": {
+      "title": "Order",
+      "description": "Customer order placed through POS or Kitchen display",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "orderType": { "type": "string" },
+        "tableNumber": { "type": "string" },
+        "subtotal": { "type": "number" },
+        "discountPercentage": { "type": "number" },
+        "discountAmount": { "type": "number" },
+        "taxRate": { "type": "number" },
+        "taxAmount": { "type": "number" },
+        "tipAmount": { "type": "number" },
+        "deliveryFee": { "type": "number" },
+        "total": { "type": "number" },
+        "paymentMethod": { "type": "string" },
+        "paymentStatus": { "type": "string" },
+        "amountPaid": { "type": "number" },
+        "changeGiven": { "type": "number" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "status": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" },
+        "kitchenNotes": { "type": "string" },
+        "isOnlineOrder": { "type": "boolean" },
+        "deliveryAddress": { "type": "string" },
+        "deliveryNotes": { "type": "string" },
+        "customerEmail": { "type": "string" },
+        "orderScheduledFor": { "type": "string" },
+        "onlineOrderStatus": { "type": "string" }
+      },
+      "required": ["id", "orderType", "subtotal", "total", "paymentMethod", "paymentStatus", "status", "createdAt", "updatedAt"]
+    },
+    "BusinessSettings": {
+      "title": "BusinessSettings",
+      "description": "Global settings for the POS business",
+      "type": "object",
+      "properties": {
+        "restaurantName": { "type": "string", "maxLength": 100 },
+        "tagline": { "type": "string", "maxLength": 100 },
+        "currencySymbol": { "type": "string", "maxLength": 5 },
+        "taxRatePercent": { "type": "number" },
+        "enableStockTracking": { "type": "boolean" },
+        "receiptFooterMessage": { "type": "string", "maxLength": 300 }
+      }
+    },
+    "TabTransaction": {
+      "title": "TabTransaction",
+      "description": "Credit tab transaction history",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "orderId": { "type": "string" },
+        "type": { "type": "string" },
+        "amount": { "type": "number" },
+        "balanceAfter": { "type": "number" },
+        "timestamp": { "type": "string" },
+        "note": { "type": "string" }
+      },
+      "required": ["id", "customerId", "type", "amount", "timestamp"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Business expenditure record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string", "maxLength": 200 },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "paymentMethod": { "type": "string" },
+        "notes": { "type": "string", "maxLength": 500 },
+        "recordedBy": { "type": "string", "maxLength": 100 }
+      },
+      "required": ["id", "title", "category", "amount", "date", "paymentMethod"]
+    }
+  },
+  "firestore": {
+    "/menuItems/{itemId}": {
+      "schema": { "$ref": "#/entities/MenuItem" },
+      "description": "Menu items collection"
+    },
+    "/customers/{customerId}": {
+      "schema": { "$ref": "#/entities/Customer" },
+      "description": "Customers collection"
+    },
+    "/orders/{orderId}": {
+      "schema": { "$ref": "#/entities/Order" },
+      "description": "Orders collection"
+    },
+    "/settings/{settingsId}": {
+      "schema": { "$ref": "#/entities/BusinessSettings" },
+      "description": "Business settings"
+    },
+    "/tabTransactions/{transactionId}": {
+      "schema": { "$ref": "#/entities/TabTransaction" },
+      "description": "Tab transaction logs"
+    },
+    "/expenses/{expenseId}": {
+      "schema": { "$ref": "#/entities/Expense" },
+      "description": "Expenses collection"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "BiteFlow POS",
+  "description": "Modern Point of Sale & Restaurant Management System with Native Android / Mobile support, Universal Receipt Exports (PNG, JPG, PDF), Offline engine, Real-time KDS, Customer Credit Tabs, Inventory, and Live Order Tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
